@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ClosetShare.iml" filepath="$PROJECT_DIR$/ClosetShare.iml" />
-      <module fileurl="file:///Volumes/Stuff/Dropbox/Projects/ClosetShare/app/app.iml" filepath="/Volumes/Stuff/Dropbox/Projects/ClosetShare/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/group4.iml" filepath="$PROJECT_DIR$/group4.iml" />
     </modules>
   </component>
 </project>
