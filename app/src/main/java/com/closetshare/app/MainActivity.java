@@ -38,6 +38,14 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        /*
+        //started adding code here
+        //check if instance is null
+        if(savedInstanceState!=null){
+
+        }
+        */
         setContentView(R.layout.activity_main);
 
         // Set up the action bar.
@@ -181,6 +189,26 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
+            /*
+            int sectionNum;
+            sectionNum = savedInstanceState.getInt(ARG_SECTION_NUMBER);
+            View rootView;
+
+            switch (sectionNum){
+                case 0:
+                    rootView = inflater.inflate(R.layout.fragment_feed, container, false);
+                    break;
+                case 1:
+                    rootView = inflater.inflate(R.layout.fragment_main, container, false);
+                    break;
+                case 2:
+                    rootView = inflater.inflate(R.layout.activity_login, container, false);
+                    break;
+                default:
+                    rootView = inflater.inflate(R.layout.fragment_feed, container, false);
+                    break;
+            }
+            */
             View rootView = inflater.inflate(R.layout.fragment_feed, container, false);
 //            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
 //            textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
