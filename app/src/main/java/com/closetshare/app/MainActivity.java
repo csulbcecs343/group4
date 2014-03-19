@@ -38,6 +38,14 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        /*
+        //started adding code here
+        //check if instance is null
+        if(savedInstanceState!=null){
+
+        }
+        */
         setContentView(R.layout.activity_main);
 
         // Set up the action bar.
@@ -129,7 +137,6 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-
             return PlaceholderFragment.newInstance(position + 1);
         }
 
@@ -182,8 +189,11 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            int sectionNum = savedInstanceState.getInt(ARG_SECTION_NUMBER);
+            /*
+            int sectionNum;
+            sectionNum = savedInstanceState.getInt(ARG_SECTION_NUMBER);
             View rootView;
+
             switch (sectionNum){
                 case 0:
                     rootView = inflater.inflate(R.layout.fragment_feed, container, false);
@@ -198,8 +208,8 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
                     rootView = inflater.inflate(R.layout.fragment_feed, container, false);
                     break;
             }
-
-            //View rootView = inflater.inflate(R.layout.fragment_feed, container, false);
+            */
+            View rootView = inflater.inflate(R.layout.fragment_feed, container, false);
 //            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
 //            textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
