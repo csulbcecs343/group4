@@ -2,6 +2,9 @@ package com.closetshare.app;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Dialog;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -14,9 +17,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Locale;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends Activity implements ActionBar.TabListener {
 
@@ -87,6 +100,8 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         startActivity(intent);
     }
 
+    List<Item> itemList = new ArrayList<Item>();
+    ClosetAdapter cAdapt;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
