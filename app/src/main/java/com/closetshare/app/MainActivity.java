@@ -2,9 +2,6 @@ package com.closetshare.app;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.Dialog;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -12,24 +9,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Locale;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public class MainActivity extends Activity implements ActionBar.TabListener {
 
@@ -52,13 +36,6 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /*
-        //started adding code here
-        //check if instance is null
-        if(savedInstanceState!=null){
-
-        }
-        */
         setContentView(R.layout.activity_main);
 
         // Set up the action bar.
@@ -70,6 +47,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
+        // The ViewPager is responsible for changing the fragments based on the user swiping
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
@@ -100,9 +78,6 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         startActivity(intent);
     }
 
-    List<Item> itemList = new ArrayList<Item>();
-    ClosetAdapter cAdapt;
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -125,6 +100,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+        Log.d("TABS", "onTabReselected at" + " position " + tab.getPosition() + " name " + tab.getText());
         // When the given tab is selected, switch to the corresponding page in
         // the ViewPager.
         mViewPager.setCurrentItem(tab.getPosition());
@@ -132,10 +108,12 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 
     @Override
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+        Log.d("TABS", "onTabReselected at" + " position " + tab.getPosition() + " name " + tab.getText());
     }
 
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+        Log.d("TABS", "onTabReselected at" + " position " + tab.getPosition() + " name " + tab.getText());
     }
 
     /**
@@ -151,8 +129,25 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         @Override
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            // Return a Fragment based on position.
+            Fragment mFragment;
+
+            switch (position) {
+                case 0:
+                    mFragment = new Feed();
+                    break;
+                case 1:
+                    mFragment = new Explore();
+                    break;
+                case 2:
+                    mFragment = new Closet();
+                    break;
+                default:
+                    mFragment = new Closet();
+                    break;
+            }
+
+            return mFragment;
         }
 
         @Override
@@ -175,60 +170,4 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
             return null;
         }
     }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            /*
-            int sectionNum;
-            sectionNum = savedInstanceState.getInt(ARG_SECTION_NUMBER);
-            View rootView;
-
-            switch (sectionNum){
-                case 0:
-                    rootView = inflater.inflate(R.layout.fragment_feed, container, false);
-                    break;
-                case 1:
-                    rootView = inflater.inflate(R.layout.fragment_main, container, false);
-                    break;
-                case 2:
-                    rootView = inflater.inflate(R.layout.activity_login, container, false);
-                    break;
-                default:
-                    rootView = inflater.inflate(R.layout.fragment_feed, container, false);
-                    break;
-            }
-            */
-            View rootView = inflater.inflate(R.layout.fragment_feed, container, false);
-//            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-//            textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }
-    }
-
 }
