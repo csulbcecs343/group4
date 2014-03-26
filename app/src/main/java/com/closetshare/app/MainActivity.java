@@ -134,16 +134,16 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 
             switch (position) {
                 case 0:
-                    mFragment = new Feed();
+                    mFragment = new FragmentFeed();
                     break;
                 case 1:
-                    mFragment = new Explore();
+                    mFragment = new FragmentExplore();
                     break;
                 case 2:
-                    mFragment = new Closet();
+                    mFragment = new FragmentCloset();
                     break;
                 default:
-                    mFragment = new Closet();
+                    mFragment = new FragmentCloset();
                     break;
             }
 

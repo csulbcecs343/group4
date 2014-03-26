@@ -14,10 +14,10 @@ import android.view.ViewGroup;
  * A simple {@link android.support.v4.app.Fragment} subclass.
  *
  */
-public class Closet extends Fragment {
+public class FragmentCloset extends Fragment {
 
 
-    public Closet() {
+    public FragmentCloset() {
         // Required empty public constructor
     }
 

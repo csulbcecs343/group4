@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.closetshare.app.Feed">
+    tools:context="com.closetshare.app.FragmentFeed">
 
     <LinearLayout
         android:orientation="vertical"

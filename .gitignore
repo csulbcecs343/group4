@@ -1,7 +1,11 @@
+# Default Android Studio .gitignore
 .gradle
 /local.properties
 /.idea/workspace.xml
 .DS_Store
+
+# Android Studio .gitignore from
+# http://stackoverflow.com/questions/16736856/what-should-be-in-my-gitignore-for-an-android-studio-project
 
 # Android Studio
 .idea
