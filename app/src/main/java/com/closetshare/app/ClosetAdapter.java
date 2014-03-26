@@ -80,10 +80,10 @@ public class ClosetAdapter extends ArrayAdapter<Item> {
                 .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         if (convertView == null) {
             if(useList){
-                viewToUse = mInflater.inflate(R.layout.simple_list_item_2, null);
+//                viewToUse = mInflater.inflate(R.layout.simple_list_item_2, null);
             }
             else{
-                viewToUse = mInflater.inflate(R.layout.example_grid_item, null);
+//                viewToUse = mInflater.inflate(R.layout.example_grid_item, null);
             }
         }
         else {
