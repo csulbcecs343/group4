@@ -7,7 +7,10 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.GridView;
+import android.widget.Toast;
 
 
 /**
@@ -26,7 +29,19 @@ public class FragmentExplore extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_explore, container, false);
+        View mView = inflater.inflate(R.layout.fragment_explore, container, false);
+
+
+        GridView mGridView = (GridView) mView.findViewById(R.id.itemGrid);
+        mGridView.setAdapter(new ImageAdapter(this.getActivity()));
+
+        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                Toast.makeText(FragmentExplore.this.getActivity(), "" + position, Toast.LENGTH_SHORT).show();
+            }
+
+        });
+        return mView;
     }
 
 
