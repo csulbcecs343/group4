@@ -14,6 +14,9 @@ import android.widget.Toast;
 
 public class AddItemActivity extends Activity {
 
+    EditText mDescription;
+    EditText mTags;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,15 +28,14 @@ public class AddItemActivity extends Activity {
         params.width  = 750;
         mImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-        EditText mDescription = (EditText) findViewById(R.id.description);
-        EditText mTags = (EditText) findViewById(R.id.tags);
+        mDescription = (EditText) findViewById(R.id.description);
+        mTags = (EditText) findViewById(R.id.tags);
 
         Button mButton = (Button) findViewById(R.id.addButton);
 
-
         mButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                Toast.makeText(AddItemActivity.this, "Add Item", Toast.LENGTH_SHORT).show();
+                addItem(v);
             }
         });
     }
@@ -56,6 +58,12 @@ public class AddItemActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void addItem(View v) {
+        String mToast = "Added Item!\nDescription: " + mDescription.getText() + "\nTags: " + mTags.getText();
+        Toast.makeText(AddItemActivity.this, mToast, Toast.LENGTH_SHORT).show();
+        finish();
     }
 
 }
