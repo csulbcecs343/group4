@@ -20,7 +20,13 @@
         <activity
             android:name="com.closetshare.app.LoginActivity"
             android:label="@string/title_activity_login"
-            android:windowSoftInputMode="adjustResize|stateVisible" />
+            android:windowSoftInputMode="adjustResize|stateVisible"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.closetshare.app.AddItemActivity"
+            android:label="@string/title_activity_add_item"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->

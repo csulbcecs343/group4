@@ -1,7 +1,8 @@
 package com.closetshare.app;
 
 
-
+import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,7 +16,6 @@ import android.widget.Toast;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
- *
  */
 public class FragmentCloset extends Fragment {
 
@@ -43,10 +43,19 @@ public class FragmentCloset extends Fragment {
 
 
         Button mButton = (Button) mView.findViewById(R.id.addItem);
-        mButton.setOnClickListener(new View.OnClickListener(){
+
+        mButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(FragmentCloset.this.getActivity(), "Add Item", Toast.LENGTH_SHORT).show();
+                // add item view
+                //Intent i = new Intent(getActivity(), AddItemActivity.class);
+                //startActivity(i);
+
+                DialogFragment newFragment = new FragmentDialog();
+                newFragment.show(getFragmentManager(), "camera");
             }
+
+
         });
         return mView;
     }
