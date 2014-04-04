@@ -2,6 +2,7 @@ package com.closetshare.app;
 
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -43,9 +44,13 @@ public class FragmentCloset extends Fragment {
 
 
         Button mButton = (Button) mView.findViewById(R.id.addItem);
+
         mButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 Toast.makeText(FragmentCloset.this.getActivity(), "Add Item", Toast.LENGTH_SHORT).show();
+                // add item view
+                Intent i = new Intent(getActivity(), AddItemActivity.class);
+                startActivity(i);
             }
         });
         return mView;
