@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -26,7 +27,7 @@ public class AddItemActivity extends Activity {
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final int MEDIA_TYPE_VIDEO = 2;
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
-    private static final int CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE = 200;
+    private static final int GALLERY_REQUEST_CODE = 300;
     EditText mDescription;
     EditText mTags;
     ImageView mImageView;
@@ -153,23 +154,28 @@ public class AddItemActivity extends Activity {
             }
             case 1: {
                 // Choose Photo
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                intent.setType("image/*");
+                startActivityForResult(
+                        Intent.createChooser(intent, "Select File"),
+                        GALLERY_REQUEST_CODE);
                 break;
             }
             default: {
-                // ?
+                // Do nothing
                 break;
             }
         }
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
-                // http://stackoverflow.com/questions/8997050/android-crashing-after-camera-intent
+        if (resultCode == RESULT_OK) {
+
+            if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+                // Credit: http://stackoverflow.com/questions/8997050/android-crashing-after-camera-intent
                 // Decode it for real
                 BitmapFactory.Options bmpFactoryOptions = new BitmapFactory.Options();
                 bmpFactoryOptions.inJustDecodeBounds = false;
@@ -178,22 +184,24 @@ public class AddItemActivity extends Activity {
                 Bitmap bmp = BitmapFactory.decodeFile(fileUri.getPath(), bmpFactoryOptions);
 
                 mImageView.setImageBitmap(bmp);
-            } else if (resultCode == RESULT_CANCELED) {
-                // User cancelled the image capture
-            } else {
-                // Image capture failed, advise user
-            }
-        }
+            } else if (requestCode == GALLERY_REQUEST_CODE) {
+                // Credit: https://github.com/thecodepath/android_guides/wiki/Using-Hardware,-Sensors-and-Device-data
+                // Selected image saved to fileUri specified in the Intent
+                fileUri = data.getData();
 
-        if (requestCode == CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
-                // Video captured and saved to fileUri specified in the Intent
-                Toast.makeText(this, "Video saved to:\n" +
-                        data.getData(), Toast.LENGTH_LONG).show();
-            } else if (resultCode == RESULT_CANCELED) {
-                // User cancelled the video capture
-            } else {
-                // Video capture failed, advise user
+                Toast.makeText(this, "Selected image saved at:\n" +
+                        fileUri, Toast.LENGTH_LONG).show();
+
+                // Do something with the photo based on Uri
+                Bitmap bmp = null;
+                try {
+                    bmp = MediaStore.Images.Media.getBitmap(this.getContentResolver(), fileUri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                // Load the selected image into a preview
+                mImageView.setImageBitmap(bmp);
             }
         }
     }
