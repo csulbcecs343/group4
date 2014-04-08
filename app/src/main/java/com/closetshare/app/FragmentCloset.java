@@ -48,8 +48,6 @@ public class FragmentCloset extends Fragment {
             public void onClick(View v) {
                 Toast.makeText(FragmentCloset.this.getActivity(), "Add Item", Toast.LENGTH_SHORT).show();
                 // add item view
-                //Intent i = new Intent(getActivity(), AddItemActivity.class);
-                //startActivity(i);
 
                 DialogFragment newFragment = new FragmentDialog();
                 newFragment.show(getFragmentManager(), "camera");
