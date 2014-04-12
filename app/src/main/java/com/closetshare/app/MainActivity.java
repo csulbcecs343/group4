@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -98,22 +97,22 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         return super.onOptionsItemSelected(item);
     }
 
+    // Monitor tab changes
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-        Log.d("TABS", "onTabReselected at" + " position " + tab.getPosition() + " name " + tab.getText());
-        // When the given tab is selected, switch to the corresponding page in
-        // the ViewPager.
+        // When the given tab is selected,
+        // switch to the corresponding page in the ViewPager.
         mViewPager.setCurrentItem(tab.getPosition());
     }
 
     @Override
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-        Log.d("TABS", "onTabReselected at" + " position " + tab.getPosition() + " name " + tab.getText());
+    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
     }
 
     @Override
-    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-        Log.d("TABS", "onTabReselected at" + " position " + tab.getPosition() + " name " + tab.getText());
+    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
     }
 
     /**
@@ -122,40 +121,46 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
+        private int NUM_PAGES = 3;
+
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
+        /**
+         * Returns a Fragment based on selected tab position.
+         * @param position of the selected tab.
+         * @return Fragment based on position.
+         */
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a Fragment based on position.
-            Fragment mFragment;
-
             switch (position) {
                 case 0:
-                    mFragment = new FragmentFeed();
-                    break;
+                    return new FragmentFeed();
                 case 1:
-                    mFragment = new FragmentExplore();
-                    break;
+                    return new FragmentExplore();
                 case 2:
-                    mFragment = new FragmentCloset();
-                    break;
+                    return new FragmentCloset();
                 default:
-                    mFragment = new FragmentCloset();
-                    break;
+                    return null;    // something bad happened
             }
-
-            return mFragment;
         }
 
+        /**
+         * Gets the count of total fragment pages.
+         * @return the total number of fragment pages.
+         */
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return NUM_PAGES;
         }
 
+        /**
+         * Gets the title of the selected tab.
+         * @param position of the selected tab.
+         * @return the title of the selected tab.
+         */
         @Override
         public CharSequence getPageTitle(int position) {
             Locale l = Locale.getDefault();

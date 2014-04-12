@@ -19,9 +19,15 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v13:+'
-    compile 'com.google.android.gms:play-services:4.0.30'
-    compile 'com.android.support:appcompat-v7:+'
+    // Google Play Services
+    compile 'com.google.android.gms:play-services:+'
+
+    // Support Libraries
     compile 'com.android.support:support-v4:+'
+    compile 'com.android.support:appcompat-v7:+'
+    compile 'com.android.support:support-v13:+'
+
+    // Note: these libraries require the "Google Repository" and "Android Repository"
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
