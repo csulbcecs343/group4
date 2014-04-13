@@ -5,8 +5,10 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -268,6 +270,16 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         mEmailView.setAdapter(adapter);
     }
 
+    private void updatePreferences(boolean notLoggedIn, int userId, String username) {
+        SharedPreferences settings = getSharedPreferences(MainActivity.CLOSETSHARE_SHARED_PREFS, Context.MODE_PRIVATE);
+        if (settings != null) {
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean(MainActivity.NOT_LOGGED_IN_PREFS_KEY, notLoggedIn);
+            editor.putInt(MainActivity.USERID_PREFS_KEY, userId);
+            editor.putString(MainActivity.USERNAME_PREFS_KEY, username);
+            editor.commit();
+        }
+    }
 
     private interface ProfileQuery {
         String[] PROJECTION = {
@@ -320,7 +332,14 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 if (apiResponses.getError() == null) loggedIn = true;
             } else loggedIn = true;
 
+            if (loggedIn) {
+                int userId = Integer.parseInt(apiResponses.getIdUser());
+                String un = apiResponses.getUsername();
+                updatePreferences(!loggedIn, userId, un);
+            }
+
             return loggedIn;
+
 
         }
 
@@ -330,6 +349,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             showProgress(false);
 
             if (success) {
+                setResult(RESULT_OK);
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

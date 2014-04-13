@@ -5,17 +5,25 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.Locale;
 
 public class MainActivity extends Activity implements ActionBar.TabListener {
 
+    public static final String CLOSETSHARE_SHARED_PREFS = "CLOSETSHARE_SHARED_PREFS";
+    public static final String NOT_LOGGED_IN_PREFS_KEY = "NOT_LOGGED_IN_PREFS_KEY";
+    public static final String USERID_PREFS_KEY = "USERID_PREFS_KEY";
+    public static final String USERNAME_PREFS_KEY = "USERNAME_PREFS_KEY";
+    private static final int INTRO_ACTIVITY_REQUEST_CODE = 1;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -25,11 +33,13 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
      * {@link android.support.v13.app.FragmentStatePagerAdapter}.
      */
     SectionsPagerAdapter mSectionsPagerAdapter;
-
     /**
      * The {@link ViewPager} that will host the section contents.
      */
     ViewPager mViewPager;
+    private boolean notLoggedIn = true;
+    private int mUserId;
+    private String mUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +79,65 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
             actionBar.addTab(
                     actionBar.newTab()
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
-                            .setTabListener(this));
+                            .setTabListener(this)
+            );
         }
 
         // start LoginActivity when done creating Main to prompt user to login
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, LoginActivity.class);
+//        startActivity(intent);
+
+        checkForPreferences();
+        Toast.makeText(this, mUsername, Toast.LENGTH_SHORT).show();
+    }
+
+    private void checkForPreferences() {
+        SharedPreferences settings = getSharedPreferences(CLOSETSHARE_SHARED_PREFS, Context.MODE_PRIVATE);
+
+        boolean notLoggedIn = true;
+
+        if (settings != null) {
+            notLoggedIn = settings.getBoolean(NOT_LOGGED_IN_PREFS_KEY, true) && this.notLoggedIn;
+            mUserId = settings.getInt(USERID_PREFS_KEY, 0);
+            mUsername = settings.getString(USERNAME_PREFS_KEY, "null");
+        }
+
+        if (notLoggedIn) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivityForResult(intent, INTRO_ACTIVITY_REQUEST_CODE);
+        } else {
+//            initiateFragments();
+        }
+    }
+
+//    private void initiateFragments() {
+//        SharedPreferences settings = getSharedPreferences(CLOSETSHARE_SHARED_PREFS, Context.MODE_PRIVATE);
+//
+//        if (settings != null) {
+//            mUserId = settings.getInt(USERID_PREFS_KEY, 0);
+//            mUsername = settings.getString(USERNAME_PREFS_KEY, "null");
+//        }
+//
+//    }
+
+    /**
+     * Override Activity lifecycle method.
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // handle result codes
+        if (requestCode == INTRO_ACTIVITY_REQUEST_CODE) {
+//                initiateFragments();
+            if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(this, "CANCELED", Toast.LENGTH_SHORT).show();
+                finish();
+            } else {
+                checkForPreferences();
+            }
+
+        }
+        // call super method to ensure unhandled result codes are handled
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -93,8 +156,22 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_logout) {
+            logout();
+            return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void logout() {
+        SharedPreferences settings = getSharedPreferences(CLOSETSHARE_SHARED_PREFS, Context.MODE_PRIVATE);
+
+        if (settings != null) {
+            SharedPreferences.Editor editor = settings.edit();
+            editor.clear();
+            editor.commit();
+            checkForPreferences();
+        }
     }
 
     // Monitor tab changes
@@ -129,6 +206,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 
         /**
          * Returns a Fragment based on selected tab position.
+         *
          * @param position of the selected tab.
          * @return Fragment based on position.
          */
@@ -148,6 +226,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 
         /**
          * Gets the count of total fragment pages.
+         *
          * @return the total number of fragment pages.
          */
         @Override
@@ -158,6 +237,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 
         /**
          * Gets the title of the selected tab.
+         *
          * @param position of the selected tab.
          * @return the title of the selected tab.
          */
