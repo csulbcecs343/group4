@@ -83,14 +83,13 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
             );
         }
 
-        // start LoginActivity when done creating Main to prompt user to login
-//        Intent intent = new Intent(this, LoginActivity.class);
-//        startActivity(intent);
-
+        // check to see if user is logged in, if not prompt login
         checkForPreferences();
+        // Shows logged in username
         Toast.makeText(this, mUsername, Toast.LENGTH_SHORT).show();
     }
 
+    // credit: https://github.com/GoogleCloudPlatform/solutions-mobile-backend-starter-android-client
     private void checkForPreferences() {
         SharedPreferences settings = getSharedPreferences(CLOSETSHARE_SHARED_PREFS, Context.MODE_PRIVATE);
 
@@ -105,20 +104,8 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         if (notLoggedIn) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivityForResult(intent, INTRO_ACTIVITY_REQUEST_CODE);
-        } else {
-//            initiateFragments();
         }
     }
-
-//    private void initiateFragments() {
-//        SharedPreferences settings = getSharedPreferences(CLOSETSHARE_SHARED_PREFS, Context.MODE_PRIVATE);
-//
-//        if (settings != null) {
-//            mUserId = settings.getInt(USERID_PREFS_KEY, 0);
-//            mUsername = settings.getString(USERNAME_PREFS_KEY, "null");
-//        }
-//
-//    }
 
     /**
      * Override Activity lifecycle method.
@@ -127,15 +114,14 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // handle result codes
         if (requestCode == INTRO_ACTIVITY_REQUEST_CODE) {
-//                initiateFragments();
             if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(this, "CANCELED", Toast.LENGTH_SHORT).show();
-                finish();
+                finish();   // finish main activity if user cancelled login
             } else {
                 checkForPreferences();
             }
-
         }
+
         // call super method to ensure unhandled result codes are handled
         super.onActivityResult(requestCode, resultCode, data);
     }
