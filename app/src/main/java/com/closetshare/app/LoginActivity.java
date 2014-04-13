@@ -28,6 +28,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -294,53 +295,34 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-//            try {
-//                // Simulate network access.
-//                Thread.sleep(2000);
-//            } catch (InterruptedException e) {
-//                return false;
-//            }
-//
-//            for (String credential : DUMMY_CREDENTIALS) {
-//                String[] pieces = credential.split(":");
-//                if (pieces[0].equals(mEmail)) {
-//                    // Account exists, return true if the password matches.
-//                    return pieces[1].equals(mPassword);
-//                }
-//            }
-            API.getInstance().post("");
-            login(mEmail, mPassword);
+            boolean loggedIn = false;
 
-            // TODO: register the new account here.
-            registerAccount(mEmail, mPassword);
+            // attempt authentication against a network service
+            API api = API.getInstance();
+            APIResponses apiResponses;
 
-            return true;
+            // attempt login
+            HashMap<String, String> options = new HashMap<String, String>();
+            options.put("command", "login");
+            options.put("username", mEmail);
+            options.put("password", mPassword);
+
+            apiResponses = api.post(options);
+
+            if (apiResponses.getError() != null) {
+                // login failed
+                // try to register new account
+                options.put("command", "register");
+                apiResponses = api.post(options);
+
+                // if registration succeed, user is logged in
+                // else account exists and user entered the wrong password
+                if (apiResponses.getError() == null) loggedIn = true;
+            } else loggedIn = true;
+
+            return loggedIn;
+
         }
-
-        private void registerAccount(String mEmail, String mPassword) {
-//            RequestParams params = new RequestParams();
-//            params.put("command", "register");
-//            params.put("username", mEmail);
-//            params.put("password", mPassword);
-//
-//            API.post("", params);
-        }
-
-        private boolean checkAccount(String mEmail) {
-            // TODO
-            return true;
-        }
-
-        private void login(String mEmail, String mPassword) {
-//            RequestParams params = new RequestParams();
-//            params.put("command", "login");
-//            params.put("username", mEmail);
-//            params.put("password", mPassword);
-//
-//            API.post("", params);
-        }
-
 
         @Override
         protected void onPostExecute(final Boolean success) {
