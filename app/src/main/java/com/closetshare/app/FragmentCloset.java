@@ -38,7 +38,7 @@ public class FragmentCloset extends Fragment {
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Toast.makeText(FragmentCloset.this.getActivity(), "View Item" + position, Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(getActivity(), ViewItemActivty.class);
+                Intent i = new Intent(getActivity(), ViewItemActivity.class);
                 startActivity(i);
             }
         });
