@@ -37,7 +37,11 @@ public class FragmentCloset extends Fragment {
 
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                Toast.makeText(FragmentCloset.this.getActivity(), "" + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(FragmentCloset.this.getActivity(), "View Item" + position, Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getActivity(), ViewItemActivity.class);
+                startActivity(i);
+
+
             }
         });
 
@@ -47,7 +51,7 @@ public class FragmentCloset extends Fragment {
         mButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(FragmentCloset.this.getActivity(), "Add Item", Toast.LENGTH_SHORT).show();
-                // add item view
+                //add item view
                 //Intent i = new Intent(getActivity(), AddItemActivity.class);
                 //startActivity(i);
 
