@@ -10,6 +10,7 @@
     <string name="addToCloset">Add to closet</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_add_item">Add Item</string>
+    <string name="title_activity_view_item">View Item</string>
     <string name="hello_world">Hello world!</string>
     <string name="dialog_cam" />
 

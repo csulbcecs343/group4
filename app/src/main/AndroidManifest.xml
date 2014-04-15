@@ -33,6 +33,11 @@
             android:label="@string/title_activity_add_item"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ViewItemActivity"
+            android:label="@string/title_activity_view_item"
+            android:screenOrientation="portrait" />
+
     </application>
 
 
