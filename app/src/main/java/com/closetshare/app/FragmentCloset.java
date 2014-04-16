@@ -2,9 +2,8 @@ package com.closetshare.app;
 
 
 import android.app.DialogFragment;
-import android.content.Intent;
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +19,11 @@ import android.widget.Toast;
 public class FragmentCloset extends Fragment {
 
 
+    public static ImageAdapter adapter;
+
     public FragmentCloset() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,11 +33,13 @@ public class FragmentCloset extends Fragment {
 
 
         GridView mGridView = (GridView) mView.findViewById(R.id.itemGrid);
-        mGridView.setAdapter(new ImageAdapter(this.getActivity()));
+        adapter = new ImageAdapter(this.getActivity());
+        mGridView.setAdapter(adapter);
 
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Toast.makeText(FragmentCloset.this.getActivity(), "" + position, Toast.LENGTH_SHORT).show();
+                refreshAdapter();
             }
         });
 
@@ -47,8 +49,8 @@ public class FragmentCloset extends Fragment {
         mButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(FragmentCloset.this.getActivity(), "Add Item", Toast.LENGTH_SHORT).show();
-                // add item view
 
+                // Display take picture or choose picture dialog
                 DialogFragment newFragment = new FragmentDialog();
                 newFragment.show(getFragmentManager(), "camera");
             }
@@ -56,6 +58,11 @@ public class FragmentCloset extends Fragment {
 
         });
         return mView;
+    }
+
+    // TODO: change to view item?
+    public void refreshAdapter() {
+        adapter.addItem("http://build.vibrantdavee.com/testimg/0.jpg");
     }
 
 
