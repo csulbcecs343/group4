@@ -2,6 +2,7 @@ package com.closetshare.app;
 
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -38,6 +39,8 @@ public class FragmentExplore extends Fragment {
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Toast.makeText(FragmentExplore.this.getActivity(), "" + position, Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getActivity(), ViewItemActivity.class);
+                startActivity(i);
             }
 
         });
