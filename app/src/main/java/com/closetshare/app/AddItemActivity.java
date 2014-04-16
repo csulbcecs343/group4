@@ -2,8 +2,6 @@ package com.closetshare.app;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -12,14 +10,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -87,21 +85,14 @@ public class AddItemActivity extends Activity {
 
         if (b != null) {
             int option = b.getInt("DialogOption");
-            Toast.makeText(this, "option: " + option, Toast.LENGTH_LONG).show();
             getPhoto(option);
         }
 
         mImageView = (ImageView) findViewById(R.id.photo);
-        LayoutParams params = mImageView.getLayoutParams();
-        params.height = 750;
-        params.width = 750;
-        mImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
         mDescription = (EditText) findViewById(R.id.description);
         mTags = (EditText) findViewById(R.id.tags);
 
         Button mButton = (Button) findViewById(R.id.addButton);
-
         mButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 addItem(v);
@@ -134,6 +125,11 @@ public class AddItemActivity extends Activity {
                 "Tags: " + mTags.getText() + "\n" +
                 "Path: " + fileUri.getPath();
         Toast.makeText(AddItemActivity.this, mToast, Toast.LENGTH_SHORT).show();
+
+        // TODO image uploading
+
+        // temporary
+        FragmentCloset.adapter.addItem(fileUri);
         finish();
     }
 
@@ -162,10 +158,6 @@ public class AddItemActivity extends Activity {
                         GALLERY_REQUEST_CODE);
                 break;
             }
-            default: {
-                // Do nothing
-                break;
-            }
         }
     }
 
@@ -176,34 +168,17 @@ public class AddItemActivity extends Activity {
         if (resultCode == RESULT_OK) {
 
             if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
-                // Credit: http://stackoverflow.com/questions/8997050/android-crashing-after-camera-intent
-                // Decode it for real
-                BitmapFactory.Options bmpFactoryOptions = new BitmapFactory.Options();
-                bmpFactoryOptions.inJustDecodeBounds = false;
+                // fileUri has the URI of the captured image
+                Picasso.with(this).load(fileUri).into(mImageView);
 
-                //imageFilePath image path which you pass with intent
-                Bitmap bmp = BitmapFactory.decodeFile(fileUri.getPath(), bmpFactoryOptions);
-
-                mImageView.setImageBitmap(bmp);
             } else if (requestCode == GALLERY_REQUEST_CODE) {
-                // Credit: https://github.com/thecodepath/android_guides/wiki/Using-Hardware,-Sensors-and-Device-data
-                // Selected image saved to fileUri specified in the Intent
+                // Get selected image's Uri saved to fileUri (specified in the Intent)
                 fileUri = data.getData();
-
-                Toast.makeText(this, "Selected image saved at:\n" +
-                        fileUri, Toast.LENGTH_LONG).show();
-
-                // Do something with the photo based on Uri
-                Bitmap bmp = null;
-                try {
-                    bmp = MediaStore.Images.Media.getBitmap(this.getContentResolver(), fileUri);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                // Load the selected image into a preview
-                mImageView.setImageBitmap(bmp);
+                Picasso.with(this).load(fileUri).into(mImageView);
             }
+        } else {
+            // result not ok
+            finish();
         }
     }
 }

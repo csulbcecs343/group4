@@ -30,6 +30,7 @@ dependencies {
     // Note: these libraries require the "Google Repository" and "Android Repository"
 
     compile 'com.squareup.retrofit:retrofit:+'
+    compile 'com.squareup.picasso:picasso:+'
     // compile 'com.squareup.okhttp:okhttp:+'
 
     compile fileTree(dir: 'libs', include: ['*.jar'])

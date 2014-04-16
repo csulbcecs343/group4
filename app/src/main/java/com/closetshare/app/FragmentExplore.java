@@ -1,29 +1,27 @@
 package com.closetshare.app;
 
 
-
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
 
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
- *
  */
 public class FragmentExplore extends Fragment {
 
 
+    ImageAdapter adapter;
+
     public FragmentExplore() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,15 +31,21 @@ public class FragmentExplore extends Fragment {
 
 
         GridView mGridView = (GridView) mView.findViewById(R.id.itemGrid);
-        mGridView.setAdapter(new ImageAdapter(this.getActivity()));
+        adapter = new ImageAdapter(this.getActivity());
+        mGridView.setAdapter(adapter);
 
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Toast.makeText(FragmentExplore.this.getActivity(), "" + position, Toast.LENGTH_SHORT).show();
+                refreshAdapter();
             }
 
         });
         return mView;
+    }
+
+    public void refreshAdapter() {
+        adapter.refresh();
     }
 
 
