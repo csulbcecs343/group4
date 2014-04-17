@@ -25,10 +25,9 @@ public class FragmentExplore extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View mView = inflater.inflate(R.layout.fragment_explore, container, false);
-
 
         GridView mGridView = (GridView) mView.findViewById(R.id.itemGrid);
         adapter = new ImageAdapter(this.getActivity());
@@ -36,7 +35,8 @@ public class FragmentExplore extends Fragment {
 
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                Toast.makeText(FragmentExplore.this.getActivity(), "" + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(FragmentExplore.this.getActivity(), "" + position,
+                        Toast.LENGTH_SHORT).show();
                 refreshAdapter();
             }
 

@@ -8,6 +8,7 @@ import retrofit.http.FormUrlEncoded;
 import retrofit.http.POST;
 
 interface ClosetShareAPI {
+
     final String BASE_URL = "/index.php";
 
     @FormUrlEncoded
@@ -17,9 +18,11 @@ interface ClosetShareAPI {
 }
 
 public class API {
+
     private static final API INSTANCE = new API();
 
     private static final String BASE_URL = "http://build.vibrantdavee.com/test";
+
     private RestAdapter ra;
 
     private API() {

@@ -36,10 +36,12 @@ package com.closetshare.app;
 public class Item {
 
     private String name;
-    private Integer distance;
-    private String descr;
-    private int idImg;
 
+    private Integer distance;
+
+    private String descr;
+
+    private int idImg;
 
 
     public Item(String name, Integer distance) {
@@ -63,18 +65,23 @@ public class Item {
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public Integer getDistance() {
         return distance;
     }
+
     public void setDistance(Integer distance) {
         this.distance = distance;
     }
+
     public int getIdImg() {
         return idImg;
     }
+
     public void setIdImg(int idImg) {
         this.idImg = idImg;
     }

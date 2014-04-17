@@ -20,10 +20,15 @@ import java.util.Locale;
 public class MainActivity extends Activity implements ActionBar.TabListener {
 
     public static final String CLOSETSHARE_SHARED_PREFS = "CLOSETSHARE_SHARED_PREFS";
+
     public static final String NOT_LOGGED_IN_PREFS_KEY = "NOT_LOGGED_IN_PREFS_KEY";
+
     public static final String USERID_PREFS_KEY = "USERID_PREFS_KEY";
+
     public static final String USERNAME_PREFS_KEY = "USERNAME_PREFS_KEY";
+
     private static final int INTRO_ACTIVITY_REQUEST_CODE = 1;
+
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -33,12 +38,16 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
      * {@link android.support.v13.app.FragmentStatePagerAdapter}.
      */
     SectionsPagerAdapter mSectionsPagerAdapter;
+
     /**
      * The {@link ViewPager} that will host the section contents.
      */
     ViewPager mViewPager;
+
     private boolean notLoggedIn = true;
+
     private int mUserId;
+
     private String mUsername;
 
     @Override
@@ -92,7 +101,8 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 
     // credit: https://github.com/GoogleCloudPlatform/solutions-mobile-backend-starter-android-client
     private void checkForPreferences() {
-        SharedPreferences settings = getSharedPreferences(CLOSETSHARE_SHARED_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences settings = getSharedPreferences(CLOSETSHARE_SHARED_PREFS,
+                Context.MODE_PRIVATE);
 
         boolean notLoggedIn = true;
 
@@ -153,7 +163,8 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
     }
 
     private void logout() {
-        SharedPreferences settings = getSharedPreferences(CLOSETSHARE_SHARED_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences settings = getSharedPreferences(CLOSETSHARE_SHARED_PREFS,
+                Context.MODE_PRIVATE);
 
         if (settings != null) {
             SharedPreferences.Editor editor = settings.edit();

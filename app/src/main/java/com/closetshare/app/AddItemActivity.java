@@ -1,5 +1,7 @@
 package com.closetshare.app;
 
+import com.squareup.picasso.Picasso;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -15,21 +17,28 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
-
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AddItemActivity extends Activity {
+
     public static final int MEDIA_TYPE_IMAGE = 1;
+
     public static final int MEDIA_TYPE_VIDEO = 2;
+
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+
     private static final int GALLERY_REQUEST_CODE = 300;
+
     private static final String APP_TAG = "ClosetShare";
+
     EditText mDescription;
+
     EditText mTags;
+
     ImageView mImageView;
+
     private Uri fileUri;
 
     /**
@@ -141,7 +150,8 @@ public class AddItemActivity extends Activity {
                 // create Intent to take a picture and return control to the calling application
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-                fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
+                fileUri = getOutputMediaFileUri(
+                        MEDIA_TYPE_IMAGE); // create a file to save the image
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
 
                 // start the image capture Intent
@@ -151,7 +161,8 @@ public class AddItemActivity extends Activity {
             }
             case 1: {
                 // Choose Photo
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                Intent intent = new Intent(Intent.ACTION_PICK,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 intent.setType("image/*");
                 startActivityForResult(
                         Intent.createChooser(intent, "Select File"),

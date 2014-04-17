@@ -9,6 +9,7 @@ import android.widget.ImageView;
  * Credit: https://github.com/square/picasso/
  */
 final class SquaredImageView extends ImageView {
+
     public SquaredImageView(Context context) {
         super(context);
     }
@@ -17,7 +18,8 @@ final class SquaredImageView extends ImageView {
         super(context, attrs);
     }
 
-    @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         setMeasuredDimension(getMeasuredWidth(), getMeasuredWidth());
     }

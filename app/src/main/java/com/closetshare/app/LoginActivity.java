@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.List;
 
 // credit: http://developer.android.com/tools/projects/templates.html
+
 /**
  * A login screen that offers login via email/password.
  */
@@ -43,10 +44,14 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
+
     // UI references.
     private AutoCompleteTextView mEmailView;
+
     private EditText mPasswordView;
+
     private View mProgressView;
+
     private View mLoginFormView;
 
     @Override
@@ -108,7 +113,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         boolean cancel = false;
         View focusView = null;
 
-
         // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
@@ -147,7 +151,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             int halfbyte = (b >>> 4) & 0x0F;
             int two_halfs = 0;
             do {
-                buf.append((0 <= halfbyte) && (halfbyte <= 9) ? (char) ('0' + halfbyte) : (char) ('a' + (halfbyte - 10)));
+                buf.append((0 <= halfbyte) && (halfbyte <= 9) ? (char) ('0' + halfbyte)
+                        : (char) ('a' + (halfbyte - 10)));
                 halfbyte = b & 0x0F;
             } while (two_halfs++ < 1);
         }
@@ -263,7 +268,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     }
 
     private void updatePreferences(boolean notLoggedIn, int userId, String username) {
-        SharedPreferences settings = getSharedPreferences(MainActivity.CLOSETSHARE_SHARED_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences settings = getSharedPreferences(MainActivity.CLOSETSHARE_SHARED_PREFS,
+                Context.MODE_PRIVATE);
         if (settings != null) {
             SharedPreferences.Editor editor = settings.edit();
             editor.putBoolean(MainActivity.NOT_LOGGED_IN_PREFS_KEY, notLoggedIn);
@@ -274,6 +280,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     }
 
     private interface ProfileQuery {
+
         String[] PROJECTION = {
                 ContactsContract.CommonDataKinds.Email.ADDRESS,
                 ContactsContract.CommonDataKinds.Email.IS_PRIMARY,
@@ -290,6 +297,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String mEmail;
+
         private final String mPassword;
 
         UserLoginTask(String email, String password) {
@@ -321,8 +329,12 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
                 // if registration succeed, user is logged in
                 // else account exists and user entered the wrong password
-                if (apiResponses.getError() == null) loggedIn = true;
-            } else loggedIn = true;
+                if (apiResponses.getError() == null) {
+                    loggedIn = true;
+                }
+            } else {
+                loggedIn = true;
+            }
 
             if (loggedIn) {
                 int userId = Integer.parseInt(apiResponses.getIdUser());

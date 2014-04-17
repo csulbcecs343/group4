@@ -1,13 +1,13 @@
 package com.closetshare.app;
 
+import com.squareup.picasso.Picasso;
+
 import android.content.Context;
 import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +22,7 @@ public class ImageAdapter extends BaseAdapter {
         add("http://build.vibrantdavee.com/testimg/2.jpg");
         add("http://build.vibrantdavee.com/testimg/3.jpg");
     }};
+
     public List<Uri> uris = new ArrayList<Uri>();
 
     private Context mContext;

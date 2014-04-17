@@ -1,11 +1,9 @@
 package com.closetshare.app;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 
 public class ViewItemActivity extends Activity {
@@ -20,7 +18,7 @@ public class ViewItemActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        
+
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.view_item_activtiy, menu);
         return true;

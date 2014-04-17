@@ -6,10 +6,17 @@ import com.google.gson.annotations.SerializedName;
 public class APIResponses {
 
     @SerializedName("IdUser")
-    @Expose private String idUser;
-    @Expose private String username;
-    @Expose private String error;
-    @Expose private int successful;
+    @Expose
+    private String idUser;
+
+    @Expose
+    private String username;
+
+    @Expose
+    private String error;
+
+    @Expose
+    private int successful;
 
     public String getIdUser() {
         return idUser;

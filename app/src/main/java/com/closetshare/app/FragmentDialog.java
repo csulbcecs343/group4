@@ -24,7 +24,8 @@ public class FragmentDialog extends DialogFragment {
                 .setItems(R.array.cam_array, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int option) {
 
-                        Toast.makeText(getActivity(), option + " was clicked", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), option + " was clicked", Toast.LENGTH_SHORT)
+                                .show();
 
                         // The 'which' argument contains the index position of the selected item
                         switch (option) {
