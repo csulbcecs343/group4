@@ -85,6 +85,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 
         // check to see if user is logged in, if not prompt login
         checkForPreferences();
+
         // Shows logged in username
         Toast.makeText(this, mUsername, Toast.LENGTH_SHORT).show();
     }
@@ -104,6 +105,8 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         if (notLoggedIn) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivityForResult(intent, INTRO_ACTIVITY_REQUEST_CODE);
+        } else {
+            setTitle(mUsername);
         }
     }
 
