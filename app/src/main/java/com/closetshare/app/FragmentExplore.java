@@ -17,7 +17,7 @@ import android.widget.Toast;
 public class FragmentExplore extends Fragment {
 
 
-    ImageAdapter adapter;
+    public static ImageAdapter adapter;
 
     public FragmentExplore() {
         // Required empty public constructor

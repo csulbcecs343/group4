@@ -40,7 +40,11 @@ public class FragmentCloset extends Fragment {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Toast.makeText(FragmentCloset.this.getActivity(), "View Item" + position,
                         Toast.LENGTH_SHORT).show();
+
+                // view item when picture is clicked
                 Intent i = new Intent(getActivity(), ViewItemActivity.class);
+                i.putExtra("fragment", "closet");
+                i.putExtra("PicPos", position);
                 startActivity(i);
             }
         });

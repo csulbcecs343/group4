@@ -1,17 +1,56 @@
 package com.closetshare.app;
 
+import com.squareup.picasso.Picasso;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class ViewItemActivity extends Activity {
+
+    int mPosition;
+
+    ImageAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_item);
+        Intent i = getIntent();
+        Bundle mBundle = i.getExtras();
+
+        SquaredImageView imageView = (SquaredImageView) findViewById(R.id.photo);
+
+        if (mBundle != null) {
+            mPosition = mBundle.getInt("PicPos");
+            String mFragment = mBundle.getString("fragment");
+
+            assert mFragment != null;
+            if (mFragment.equals("closet")) {
+                mAdapter = FragmentCloset.adapter;
+            } else if (mFragment.equals("explore")) {
+                mAdapter = FragmentCloset.adapter;
+            }
+
+            if (mAdapter.isURI(mPosition)) {
+                Picasso.with(this).load(mAdapter.getURIItem(mPosition)).into(imageView);
+            } else {
+                Picasso.with(this).load(mAdapter.getItem(mPosition)).into(imageView);
+            }
+        }
+
+        Button deleteButton = (Button) findViewById(R.id.deleteButton);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                mAdapter.removeItem(mPosition);
+                finish();
+            }
+        });
 
     }
 

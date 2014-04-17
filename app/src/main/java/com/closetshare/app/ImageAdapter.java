@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,25 @@ public class ImageAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    public void removeItem(int position) {
+        String message = "Pos: " + position +
+                "\nurls size: " + urls.size() +
+                "\nuris size: " + uris.size();
+        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+
+        // Get the image URL for the current position.
+        if (isURI(position)) {
+            uris.remove(position - urls.size());
+        } else {
+            urls.remove(position);
+        }
+        notifyDataSetChanged();
+    }
+
+    public boolean isURI(int position) {
+        return (position >= urls.size());
+    }
+
     public int getCount() {
         return urls.size() + uris.size();
     }
@@ -77,7 +97,6 @@ public class ImageAdapter extends BaseAdapter {
             String url = getItem(position);
 
             // Trigger the download of the URL asynchronously into the image view.
-            Picasso.with(mContext).setDebugging(true);
             Picasso.with(mContext)
                     .load(url)
                     .into(imageView);
@@ -85,7 +104,6 @@ public class ImageAdapter extends BaseAdapter {
             Uri uri = getURIItem(position);
 
             // Trigger the download of the URL asynchronously into the image view.
-            Picasso.with(mContext).setDebugging(true);
             Picasso.with(mContext)
                     .load(uri)
                     .into(imageView);
