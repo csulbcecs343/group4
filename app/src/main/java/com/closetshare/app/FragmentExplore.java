@@ -2,6 +2,7 @@ package com.closetshare.app;
 
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,16 +38,16 @@ public class FragmentExplore extends Fragment {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Toast.makeText(FragmentExplore.this.getActivity(), "" + position,
                         Toast.LENGTH_SHORT).show();
-                refreshAdapter();
+                // view item when picture is clicked
+                Intent i = new Intent(getActivity(), ViewItemActivity.class);
+                i.putExtra("fragment", "explore");
+                i.putExtra("PicPos", position);
+                startActivity(i);
+
             }
 
         });
         return mView;
     }
-
-    public void refreshAdapter() {
-        adapter.refresh();
-    }
-
 
 }
