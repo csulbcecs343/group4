@@ -310,8 +310,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             boolean loggedIn = false;
 
             // attempt authentication against a network service
-            API api = API.getInstance();
-            APIResponses apiResponses;
+            Api api = Api.getInstance();
+            ApiResponses apiResponses;
 
             // attempt login
             HashMap<String, String> options = new HashMap<String, String>();
