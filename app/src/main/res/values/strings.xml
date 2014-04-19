@@ -9,7 +9,9 @@
     <string name="action_logout">Logout</string>
     <string name="title_activity_add_item">Add Item</string>
     <string name="title_activity_view_item">View Item</string>
-    <string name="dialog_cam"/>
+    <string name="dialog_cam"></string>
     <string name="search_hint">Search users</string>
+    <string name="title_activity_searchable">SearchableActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>
