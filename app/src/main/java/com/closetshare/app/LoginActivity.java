@@ -316,7 +316,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             // attempt login
             HashMap<String, String> options = new HashMap<String, String>();
             options.put("command", "login");
-            options.put("username", mEmail);
+            options.put("username", mEmail.toLowerCase());
             options.put("password", mPassword);
 
             apiResponses = api.post(options);

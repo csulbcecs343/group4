@@ -1,7 +1,5 @@
 package com.closetshare.app;
 
-import com.squareup.picasso.Picasso;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -16,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
