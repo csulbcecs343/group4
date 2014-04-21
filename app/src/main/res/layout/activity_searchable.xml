@@ -4,6 +4,27 @@
                 android:layout_height="match_parent"
                 tools:context="${packageName}.${activityClass}">
 
+    <ProgressBar
+        android:id="@+id/login_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:gravity="center_horizontal"
+        android:visibility="gone"/>
+
+
+    <TextView
+        android:id="@+id/noResults"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_horizontal"
+        android:text="No Results."
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:visibility="invisible"/>
+
     <ListView
         android:id="@android:id/list"
         android:layout_width="wrap_content"
