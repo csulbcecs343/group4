@@ -12,27 +12,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/viewCloset_username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:text="User Name"
-                android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-            <com.closetshare.app.SquaredImageView
-                android:id="@+id/photo"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher"/>
-
+            <com.closetshare.app.PostView
+                android:id="@+id/postView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -42,24 +28,10 @@
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/descriptionView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Check out my green droid"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-                <TextView
-                    android:id="@+id/rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="10 Likes"
-                    android:textAppearance="?android:attr/textAppearanceSmall"/>
-
-
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
                     android:orientation="horizontal">
 
                     <Button

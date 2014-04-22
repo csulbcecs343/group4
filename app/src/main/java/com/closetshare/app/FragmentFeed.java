@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 
 /**
@@ -23,7 +24,21 @@ public class FragmentFeed extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_feed, container, false);
+        View mView = inflater.inflate(R.layout.fragment_feed, container, false);
+
+        PostAdapter postAdapter = new PostAdapter(getActivity());
+        ListView view = (ListView) mView.findViewById(R.id.listView);
+        view.setAdapter(postAdapter);
+
+        for (int i = 0; i < 4; i++) {
+
+            postAdapter.addItem(("User " + i),
+                    ("http://build.vibrantdavee.com/testimg/" + i + ".jpg"),
+                    ("I am User " + i + " check me out!"),
+                    i * 5);
+        }
+
+        return mView;
     }
 
 
