@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
@@ -49,7 +48,7 @@ public class PostAdapter extends BaseAdapter {
         if (postView == null) {
             postView = new PostView(mContext);
         } else {
-          postView = mList.get(position);
+            postView = mList.get(position);
         }
 
         return postView;

@@ -15,6 +15,8 @@ public class PostView extends LinearLayout {
 
     private Context mContext;
 
+    private String mUsername;
+
     public PostView(Context context) {
         super(context);
 
@@ -39,10 +41,15 @@ public class PostView extends LinearLayout {
         setPhoto(photoUrl);
         setRating(rating);
     }
-    public void setUsername(String username) {
-        TextView textView = (TextView) findViewById(R.id.username);
 
-        textView.setText(username);
+    public String getUsername() {
+        return mUsername;
+    }
+
+    public void setUsername(String username) {
+        mUsername = username;
+        TextView textView = (TextView) findViewById(R.id.username);
+        textView.setText(mUsername);
     }
 
     public void setDescription(String description) {
