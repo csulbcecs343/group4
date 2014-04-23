@@ -5,9 +5,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class ApiResponses {
 
-    @SerializedName("IdUser")
     @Expose
-    private String idUser;
+    private String userId;
 
     @Expose
     private String username;
@@ -18,12 +17,12 @@ public class ApiResponses {
     @Expose
     private int successful;
 
-    public String getIdUser() {
-        return idUser;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {

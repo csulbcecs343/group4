@@ -337,7 +337,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             }
 
             if (loggedIn) {
-                int userId = Integer.parseInt(apiResponses.getIdUser());
+                int userId = Integer.parseInt(apiResponses.getUserId());
                 String un = apiResponses.getUsername();
                 updatePreferences(!loggedIn, userId, un);
             }
