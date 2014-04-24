@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -18,8 +19,12 @@ public class ViewClosetActivity extends Activity {
 
     public static ImageAdapter adapter;
 
-    String mUsername;
-    Boolean mPrivate;
+    private String mUsername;
+
+    private Boolean mPrivate;
+
+    private TextView mPostVal;
+
     private ViewClosetTask mTask = null;
 
     @Override
@@ -32,8 +37,10 @@ public class ViewClosetActivity extends Activity {
 
         if (mBundle != null) {
             mUsername = mBundle.getString("username");
-            mPrivate  = mBundle.getBoolean("private");
+            mPrivate = mBundle.getBoolean("private");
         }
+
+        mPostVal = (TextView) findViewById(R.id.postCount);
 
         GridView mGridView = (GridView) findViewById(R.id.itemGrid);
         adapter = new ImageAdapter(this);
@@ -61,7 +68,7 @@ public class ViewClosetActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        
+
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.view_closet, menu);
         return true;
@@ -109,8 +116,11 @@ public class ViewClosetActivity extends Activity {
                     break;
                 }
 
-                adapter.addItem("http://build.vibrantdavee.com/testimg/"+ (Integer.parseInt(curVal.getPhotoId()) % 4) +".jpg");
+                adapter.addItem("http://build.vibrantdavee.com/testimg/" + (
+                        Integer.parseInt(curVal.getPhotoId()) % 4) + ".jpg");
             }
+
+            mPostVal.setText(String.valueOf(adapter.getCount()));
         }
     }
 }
