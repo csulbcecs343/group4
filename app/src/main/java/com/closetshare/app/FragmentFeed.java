@@ -2,6 +2,7 @@ package com.closetshare.app;
 
 
 import android.app.Fragment;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +10,17 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
+import java.util.HashMap;
+
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
  */
 public class FragmentFeed extends Fragment {
+
+    GetFeedTask mTask = null;
+
+    PostAdapter mAdapter;
 
 
     public FragmentFeed() {
@@ -27,19 +34,9 @@ public class FragmentFeed extends Fragment {
         // Inflate the layout for this fragment
         View mView = inflater.inflate(R.layout.fragment_feed, container, false);
 
-        PostAdapter postAdapter = new PostAdapter(getActivity());
+        mAdapter = new PostAdapter(getActivity());
         ListView view = (ListView) mView.findViewById(R.id.listView);
-        view.setAdapter(postAdapter);
-
-        for (int i = 0; i < 24; i++) {
-
-            postAdapter.addItem(("User " + i),
-                    ("http://build.vibrantdavee.com/testimg/" + i % 4 + ".jpg"),
-                    i % 2 == 0 ? ("I am User " + i + " check me out!")
-                            : ("I am \nUser " + i + "\n check me out!"),
-                    i * 5
-            );
-        }
+        view.setAdapter(mAdapter);
 
         // credit: http://sriramramani.wordpress.com/2012/10/17/instagram-list-view/
         // OnScrollListener is the AbsListView.OnScrollListener.
@@ -94,8 +91,47 @@ public class FragmentFeed extends Fragment {
             }
         });
 
+        mTask = new GetFeedTask();
+        mTask.execute();
+
         return mView;
     }
 
+    /**
+     * An asynchronous pull of a user's closet
+     */
+    class GetFeedTask extends AsyncTask<Void, Void, ApiViewCloset> {
+
+        public GetFeedTask() {
+            super();
+        }
+
+        @Override
+        protected ApiViewCloset doInBackground(Void... params) {
+            Api api = Api.getInstance();
+
+            HashMap<String, String> options = new HashMap<String, String>();
+            options.put("command", "stream");
+
+            return api.viewCloset(options);
+        }
+
+        @Override
+        protected void onPostExecute(ApiViewCloset apiViewCloset) {
+            super.onPostExecute(apiViewCloset);
+
+            for (ClosetItem curVal : apiViewCloset.getResult()) {
+                if (isCancelled()) {
+                    break;
+                }
+
+                mAdapter.addItem((curVal.getUsername()),
+                        ("http://build.vibrantdavee.com/testimg/" + curVal.getPhotoId() + ".jpg"),
+                        curVal.getDescript(),
+                        Integer.parseInt(curVal.getUserId()) * 5
+                );
+            }
+        }
+    }
 
 }
