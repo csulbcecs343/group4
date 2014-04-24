@@ -19,6 +19,10 @@ interface ApiClosetShare {
     @POST(BASE_URL)
     public ApiSearchResult searchPost(@FieldMap Map<String, String> options);
 
+    @FormUrlEncoded
+    @POST(BASE_URL)
+    public ApiViewCloset viewClosetPost(@FieldMap Map<String, String> options);
+
 }
 
 public class Api {
@@ -49,5 +53,9 @@ public class Api {
 
     public ApiSearchResult search(Map<String, String> options) {
         return mApi.searchPost(options);
+    }
+
+    public ApiViewCloset viewCloset(Map<String, String> options) {
+        return mApi.viewClosetPost(options);
     }
 }

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.SearchView;
 
@@ -40,6 +41,17 @@ public class SearchableActivity extends ListActivity {
 
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mList);
         setListAdapter(mAdapter);
+
+        // view user's closet when clicked
+        getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                Intent i = new Intent(SearchableActivity.this, ViewClosetActivity.class);
+                i.putExtra("username", mList.get(position));
+                i.putExtra("private", false);
+                startActivity(i);
+            }
+
+        });
 
         mNoResults = findViewById(R.id.noResults);
 

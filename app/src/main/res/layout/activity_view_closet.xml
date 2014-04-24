@@ -1,0 +1,79 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="4dp"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="right"
+        android:layout_marginBottom="4dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/postCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+            <TextView
+                android:id="@+id/postString"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Posts"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/friendCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+            <TextView
+                android:id="@+id/friendString"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Friends"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/addButton"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="+"/>
+
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/itemGrid"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:horizontalSpacing="8dp"
+        android:numColumns="3"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="8dp"
+        />
+
+</LinearLayout>
+

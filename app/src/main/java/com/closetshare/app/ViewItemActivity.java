@@ -35,6 +35,8 @@ public class ViewItemActivity extends Activity {
                 mAdapter = FragmentCloset.adapter;
             } else if (mFragment.equals("explore")) {
                 mAdapter = FragmentExplore.adapter;
+            } else if (mFragment.equals("viewcloset")) {
+                mAdapter = ViewClosetActivity.adapter;
             }
 
             if (mAdapter.isURI(mPosition)) {
