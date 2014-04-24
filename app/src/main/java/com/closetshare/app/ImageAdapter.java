@@ -17,11 +17,6 @@ public class ImageAdapter extends BaseAdapter {
 
     // TODO change to use result from database instead of urls and uris
     public List<String> urls = new ArrayList<String>() {{
-        add("http://i.imgur.com/DvpvklR.png");
-        add("http://build.vibrantdavee.com/testimg/0.jpg");
-        add("http://build.vibrantdavee.com/testimg/1.jpg");
-        add("http://build.vibrantdavee.com/testimg/2.jpg");
-        add("http://build.vibrantdavee.com/testimg/3.jpg");
     }};
 
     public List<Uri> uris = new ArrayList<Uri>();

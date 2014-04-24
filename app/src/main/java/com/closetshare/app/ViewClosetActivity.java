@@ -116,8 +116,8 @@ public class ViewClosetActivity extends Activity {
                     break;
                 }
 
-                adapter.addItem("http://build.vibrantdavee.com/testimg/" + (
-                        Integer.parseInt(curVal.getPhotoId()) % 14) + ".jpg");
+                adapter.addItem(
+                        "http://build.vibrantdavee.com/testimg/" + curVal.getPhotoId() + ".jpg");
             }
 
             mPostVal.setText(String.valueOf(adapter.getCount()));

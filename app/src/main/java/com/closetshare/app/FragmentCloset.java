@@ -49,6 +49,12 @@ public class FragmentCloset extends Fragment {
             }
         });
 
+        adapter.addItem("http://i.imgur.com/DvpvklR.png");
+        adapter.addItem("http://build.vibrantdavee.com/testimg/0.jpg");
+        adapter.addItem("http://build.vibrantdavee.com/testimg/1.jpg");
+        adapter.addItem("http://build.vibrantdavee.com/testimg/2.jpg");
+        adapter.addItem("http://build.vibrantdavee.com/testimg/3.jpg");
+
         Button mButton = (Button) mView.findViewById(R.id.addItem);
 
         mButton.setOnClickListener(new View.OnClickListener() {
